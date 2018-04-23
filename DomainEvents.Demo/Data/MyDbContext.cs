@@ -11,6 +11,7 @@ namespace DomainEvents.Demo.Data
             }
 
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Log> Logs { get; set; }
 
         public override int SaveChanges()
             {

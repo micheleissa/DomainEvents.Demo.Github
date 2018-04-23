@@ -19,7 +19,7 @@ namespace DomainEvents.Demo.Data.Entities
             this.DateOfBirth = emailDto.Dob;
             var changedEvent = new EmployeeChangedDomainEvent
                 {
-                ChangedEmployee = this
+                EmpId = this.Id // just to demonstrate
                 };
             DomainEvents.GetDomainEventsQueue().AddToQueue(changedEvent);
             }

@@ -1,4 +1,5 @@
 ﻿using DomainEvents.Demo.Data;
+using DomainEvents.Demo.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,7 @@ namespace DomainEvents.Demo
                 .AsImplementedInterfaces()
                 .WithTransientLifetime());
             services.AddScoped<DomainEvents>();
+            services.AddScoped<IEmpRepository, EmpRepository>();
             services.AddDbContext<MyDbContext>(cfg =>
                 {
                 cfg.UseSqlServer(_config.GetConnectionString("MyDbConnectionString"));

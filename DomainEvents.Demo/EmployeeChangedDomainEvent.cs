@@ -10,6 +10,6 @@ namespace DomainEvents.Demo
 {
     public class EmployeeChangedDomainEvent : IDomainEvent
     {
-    public Employee ChangedEmployee { get; set; }
+    public int EmpId { get; set; }
     }
 }
