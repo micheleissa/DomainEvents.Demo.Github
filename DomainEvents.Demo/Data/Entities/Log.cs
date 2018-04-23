@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace DomainEvents.Demo.Data.Entities
 {
-    public class Log
+    public class Log : EntityBase<int>
     {
-    public int Id { get; set; }
     public string Message { get; set; }
     public int Level { get; set; }
     }

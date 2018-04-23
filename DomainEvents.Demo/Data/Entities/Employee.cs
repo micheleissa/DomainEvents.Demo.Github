@@ -2,9 +2,8 @@
 
 namespace DomainEvents.Demo.Data.Entities
 {
-    public class Employee
+    public class Employee : EntityBase<int>
         {
-        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Ssn { get; set; }
@@ -21,7 +20,8 @@ namespace DomainEvents.Demo.Data.Entities
                 {
                 EmpId = this.Id // just to demonstrate
                 };
-            DomainEvents.GetDomainEventsQueue().AddToQueue(changedEvent);
+            AddDomainEvent(changedEvent);
+            //DomainEvents.GetDomainEventsQueue().AddToQueue(changedEvent);
             }
         }
 }

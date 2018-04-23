@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using DomainEvents.Demo.Data;
 using DomainEvents.Demo.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -27,13 +28,13 @@ namespace DomainEvents.Demo.Controllers
             }
 
     [HttpPost,Route("{id:int}/Edit")]
-    public IActionResult EditEmployee(int id, [Bind("FName,LName")]EmpDto model)
+    public async Task<IActionResult> EditEmployee(int id, [Bind("FName,LName")]EmpDto model)
         {
         var existingEmp = _myDbContext.Employees.FirstOrDefault(e => e.Id == id);
         if (existingEmp == null)
             return NotFound($"Could not find Employee with id = '{id}'");
         existingEmp.Update(model);
-        _myDbContext.SaveChanges();
+        await _myDbContext.SaveEntitiesAsync();
         return Ok("Employee has changed successfully");
         }
 

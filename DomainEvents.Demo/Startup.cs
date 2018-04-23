@@ -1,5 +1,7 @@
-﻿using DomainEvents.Demo.Data;
+﻿using System.Reflection;
+using DomainEvents.Demo.Data;
 using DomainEvents.Demo.Repositories;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +29,7 @@ namespace DomainEvents.Demo
                 .AsImplementedInterfaces()
                 .WithTransientLifetime());
             services.AddScoped<DomainEvents>();
+            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
             services.AddScoped<IEmpRepository, EmpRepository>();
             services.AddDbContext<MyDbContext>(cfg =>
                 {
