@@ -25,7 +25,7 @@ namespace DomainEvents.Demo
                     .FromAssemblyOf<Program>()
             .AddClasses(classes => classes.AssignableTo(typeof(IHandle<>)))
                 .AsImplementedInterfaces()
-                .WithTransientLifetime());
+                .WithScopedLifetime());
             services.AddScoped<DomainEvents>();
             services.AddScoped<IEmpRepository, EmpRepository>();
             services.AddDbContext<MyDbContext>(cfg =>
@@ -42,7 +42,7 @@ namespace DomainEvents.Demo
                 {
                 app.UseDeveloperExceptionPage();
                 }
-            DomainEvents.AppServices = app.ApplicationServices;
+            app.UseDomainEvents(); // should be registered as one of the first middlewears
             app.UseMvc(cfg => { cfg.MapRoute("Default","{controller}/{action}/{id?}",new{controller="Home", Action="Index"}); });
             if (env.IsDevelopment())
                 {

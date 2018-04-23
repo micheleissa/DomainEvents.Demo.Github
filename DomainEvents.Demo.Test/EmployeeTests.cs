@@ -27,7 +27,7 @@ namespace DomainEvents.Demo.Test
             serviceProvider.Setup(x => x.GetService(typeof(IServiceScopeFactory)))
                            .Returns(serviceScopeFactory.Object);
 
-            DomainEvents.AppServices = serviceProvider.Object;
+            DomainEvents.ServiceProvider = serviceProvider.Object;
 
             var emp = new Employee
                 {

@@ -10,7 +10,11 @@ namespace DomainEvents.Demo
         private List<IDomainEvent> _domainEventsQueue = new List<IDomainEvent>();
         public IReadOnlyCollection<IDomainEvent> DomainEventsQueue => _domainEventsQueue?.AsReadOnly();
 
-        public static IServiceProvider AppServices { get; set; }
+        public static IServiceProvider ServiceProvider
+        {
+            get { return CallContext<IServiceProvider>.GetData("DomainEvents.ServiceProvider"); }
+            set { CallContext<IServiceProvider>.SetData("DomainEvents.ServiceProvider", value); }
+        }
 
         public void AddToQueue<T>(T domainEvent) where T : IDomainEvent
         {
@@ -20,23 +24,17 @@ namespace DomainEvents.Demo
 
         public static void Raise<T>(T args) where T : IDomainEvent
         {
-            if (AppServices != null)
-            {
-                var handlers = new List<IHandle<T>>();
-                var scope = AppServices.CreateScope();
-                handlers.AddRange(scope.ServiceProvider.GetServices<IHandle<T>>());
+                var handlers = ServiceProvider.GetServices<IHandle<T>>();
 
                 foreach (var handler in handlers)
                 {
                     handler.Handle(args);
                 }
-            }
         }
 
         public static DomainEvents GetDomainEventsQueue()
             {
-            var scope = AppServices.CreateScope();
-            var events = scope.ServiceProvider.GetService<DomainEvents>();
+            var events = ServiceProvider.GetService<DomainEvents>();
             return events;
         }
 
