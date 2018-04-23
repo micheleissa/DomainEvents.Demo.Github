@@ -1,0 +1,12 @@
+{
+  "ConnectionStrings": {
+    "MyDbConnectionString":
+      "server=(localdb)\\ProjectsV13;Database=Mydb;Integrated Security=true;MultipleActiveResultSets=true;"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning"
+    }
+  }
+}

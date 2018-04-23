@@ -1,0 +1,17 @@
+﻿@model DomainEvents.Demo.Data.Entities.EmpDto
+@{
+    ViewData["Title"] = "Edit Employee";
+    Layout = "_Layout";
+}
+
+<h2>Edit Employee</h2>
+
+<form asp-action="EditEmployee" method="post" asp-route-id="1">
+    <label for="FName">First Name:
+        <input asp-for="FName" id="FName"/>
+    </label>
+    <label for="LName">Last Name:
+        <input asp-for="LName" id="LName"/>
+    </label>
+    <input type="submit"/>
+</form>
